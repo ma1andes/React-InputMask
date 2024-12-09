@@ -1,0 +1,8 @@
+.btn .btn-primary {
+    pointer-events: none;
+}
+
+.btn .btn-primary--active {
+    pointer-events: auto;
+    cursor: pointer;
+}
