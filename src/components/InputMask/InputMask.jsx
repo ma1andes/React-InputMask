@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import InputMask from "react-input-mask";
 import styles from './InputMask.module.css'
 
-const PhoneNumberInput = () => {
-  const [country, setCountry] = useState("RU"); // Текущая страна
-  const [phone, setPhone] = useState(""); // Введённый номер телефона
+const PhoneNumberInput = ({ phone, onPhoneChange }) => {
+  const [country, setCountry] = useState("RU");
 
-  // Маски для России и Казахстана
   const masks = {
     RU: "+7 (999) 999-99-99",
-    KZ: "+7 (799) 999-99-99", // Экранирование символов для предотвращения автоматического заполнения
+    KZ: "+7 (799) 999-99-99",
   };
 
   const handleCountryChange = (event) => {
-    setCountry(event.target.value); // Меняем страну
-    setPhone(""); // Очищаем ввод
+    setCountry(event.target.value);
+    onPhoneChange(""); // Очищаем номер телефона при смене страны
   };
 
   const handlePhoneChange = (event) => {
-    setPhone(event.target.value); // Обновляем состояние номера
+    const value = event.target.value;
+    const isComplete = !value.includes("_"); // Проверка на полное заполнение маски
+    onPhoneChange(value, isComplete); // Передаём номер и его валидность
   };
 
   return (
@@ -33,15 +33,13 @@ const PhoneNumberInput = () => {
           <option value="KZ">Казахстан</option>
         </select>
       </label>
-
-      {/* Маска для ввода номера */}
       <InputMask
         mask={masks[country]}
         value={phone}
         onChange={handlePhoneChange}
         placeholder="Введите номер телефона"
-        maskChar={null} // Отключает автозаполнение символами
-        alwaysShowMask={true} // Не показывать маску до ввода
+        maskChar="_"
+        alwaysShowMask={true}
       >
         {(inputProps) => (
           <input
