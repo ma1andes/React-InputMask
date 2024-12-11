@@ -13,7 +13,7 @@ function MultipleInputsExample({ formData, onDataChange }) {
   return (
       <div className={styles.dataInput}>
           <InputGroup className="mb-3">
-              <InputGroup.Text className={styles.Text}>Введите Имя и Фамилию</InputGroup.Text>
+              <InputGroup.Text className={styles.text}>Введите Имя и Фамилию</InputGroup.Text>
               <Form.Control
                   placeholder="Имя"
                   value={formData.firstName}
