@@ -26,6 +26,7 @@ const PhoneNumberInput = ({ phone, onPhoneChange }) => {
       <label className={styles.inputText}>
         Выберите страну:
         <select
+          className={styles.selectCountry}
           value={country}
           onChange={handleCountryChange}
         >
